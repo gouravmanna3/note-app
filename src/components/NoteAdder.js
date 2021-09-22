@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState, useRef, RefObject } from 'react';
-import { Box, Button, TextField, Modal, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { useRef } from 'react';
+import { Box, Button, TextField, Modal } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { ADD_NOTE } from '../redux/actions';
 

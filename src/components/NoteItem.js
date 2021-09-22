@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Box, Typography, Card, CardContent, CardActions, Button, Modal, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { DELETE_NOTE, UPDATE_NOTE } from '../redux/actions';
