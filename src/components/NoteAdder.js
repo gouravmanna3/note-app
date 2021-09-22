@@ -42,17 +42,17 @@ const NoteAdder = () => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const titleFieldRef = useRef(null);
-  const notesFieldRef = useRef(null);
+  const dataFieldRef = useRef(null);
 
   const addNotesItem = () => {
     const title = titleFieldRef.current.value;
-    const notes = notesFieldRef.current.value;
-    if(title && notes) {
+    const data = dataFieldRef.current.value;
+    if(title && data) {
       dispatch({
         type: ADD_NOTE,
         payload: {
           title,
-          notes
+          data
         }
       });
       setOpen(false);
@@ -66,7 +66,7 @@ const NoteAdder = () => {
   return (
     <Box>
       <Button variant="contained" color="primary" className={classes.addButton} onClick={handleOpen}>
-        Add
+        Add Note
       </Button>
       <Modal
         open={open}
@@ -76,7 +76,7 @@ const NoteAdder = () => {
       >
         <Box sx={style}>
           <TextField id="note-title" className={classes.titleField}  label="Title" variant="outlined" inputRef={titleFieldRef}/>
-          <TextField variant="outlined" className={classes.titleField} label="Enter Notes" multiline rows={2} rowsMax={4} inputRef={notesFieldRef} />
+          <TextField variant="outlined" className={classes.titleField} label="Enter Notes" multiline minRows={2} maxRows={4} inputRef={dataFieldRef} />
           <Button variant="contained" color="primary" onClick={addNotesItem}>Save</Button>
         </Box>
       </Modal>

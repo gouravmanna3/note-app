@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { ADD_NOTE, DELETE_NOTE } from './actions';
+import { ADD_NOTE, DELETE_NOTE, UPDATE_NOTE } from './actions';
 import { initialState } from './initial-state';
 
 function saveNotesToBrowser(state) {
@@ -7,17 +7,17 @@ function saveNotesToBrowser(state) {
 }
 
 function reducer(state = initialState, action) {
+  
   switch(action.type) {
 
     case ADD_NOTE: {
-      const { title, notes } = action.payload;
-      console.log(action.payload)
+      const { title, data } = action.payload;
       const newNotes = [
         ...state.notes,
         {
           id: nanoid(),
           title,
-          data: notes
+          data
         }
       ];
       saveNotesToBrowser({notes: newNotes});
@@ -25,7 +25,6 @@ function reducer(state = initialState, action) {
         ...state,
         notes: newNotes
       }
-      
     }
 
     case DELETE_NOTE: {
@@ -36,7 +35,27 @@ function reducer(state = initialState, action) {
         ...state,
         notes: newNotes
       }
-    }  
+    }
+
+    case UPDATE_NOTE: {
+      const { updatedTitle, updatedData, id } = action.payload;
+      const newNotes = state.notes.map(note => {
+        if(note.id===id) {
+          return {
+            id,
+            title: updatedTitle,
+            data: updatedData
+          }
+        } 
+        return note;
+      });
+      saveNotesToBrowser({notes: newNotes});
+      return {
+        ...state,
+        notes: newNotes
+      }
+    }
+
     default:
       saveNotesToBrowser(state);
       return state;
